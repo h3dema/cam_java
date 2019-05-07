@@ -75,38 +75,38 @@ public class MinhaWebcam extends javax.swing.JFrame implements Runnable, WindowL
     @Override
     public void run() {
         Webcam.addDiscoveryListener(this);
-        
+
         setTitle("Minha webcam");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         addWindowListener(this);
-        
+
         seletor = new WebcamPicker();
         seletor.addItemListener(this);
         webcam = seletor.getSelectedWebcam();
-        
+
         if (null == webcam) {
             System.out.println("Não achou webcam. Saindo...");
-            System.exit(1);            
+            System.exit(1);
         }
-        
+
         painel = new WebcamPanel(webcam, false);
         painel.setFPSDisplayed(true);
-        
+
         add(seletor, BorderLayout.NORTH);
         add(painel, BorderLayout.CENTER);
-        
+
         pack();
         setVisible(true);
-        
+
         Thread t = new Thread() {
           @Override
           public void run() {
               painel.start();
           }
         };
-        
+
         t.setName("exemplo do start");
         t.setDaemon(true);
         t.setUncaughtExceptionHandler(this);
@@ -115,12 +115,12 @@ public class MinhaWebcam extends javax.swing.JFrame implements Runnable, WindowL
 
     @Override
     public void windowOpened(WindowEvent e) {
-        
+
     }
 
     @Override
     public void windowClosing(WindowEvent e) {
-        
+
     }
 
     @Override
@@ -148,22 +148,22 @@ public class MinhaWebcam extends javax.swing.JFrame implements Runnable, WindowL
 
     @Override
     public void webcamOpen(WebcamEvent we) {
-        
+
     }
 
     @Override
     public void webcamClosed(WebcamEvent we) {
-        
+
     }
 
     @Override
     public void webcamDisposed(WebcamEvent we) {
-        
+
     }
 
     @Override
     public void webcamImageObtained(WebcamEvent we) {
-        
+
     }
 
     @Override
@@ -184,16 +184,16 @@ public class MinhaWebcam extends javax.swing.JFrame implements Runnable, WindowL
     public void itemStateChanged(ItemEvent e) {
         if (e.getItem() != webcam) {
             if (null != webcam) {
-                painel.stop();                
+                painel.stop();
                 remove(painel);
-                
+
                 webcam.removeWebcamListener(this);
                 webcam.close();
-                
+
                 webcam = (Webcam) e.getItem();
                 webcam.setViewSize(WebcamResolution.VGA.getSize());
                 webcam.addWebcamListener(this);
-                
+
                 painel = new WebcamPanel(webcam, false);
                 painel.setFPSDisplayed(true);
                 add(painel, BorderLayout.CENTER);
