@@ -1,0 +1,28 @@
+<assembly>
+  <id>zip</id>
+  <formats>
+    <format>jar</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory></outputDirectory>
+      <outputFileNameMapping></outputFileNameMapping>
+      <unpack>true</unpack>
+      <scope>runtime</scope>
+      <includes>
+        <include>webcam-capture-0.3.10:webcam-capture</include>
+        <include>slf4j-log4j12-1.7.12:slf4j-log4j12</include>
+        <include>slf4j-api-1.7.12:slf4j-api</include>
+        <include>log4j-1.2.17:log4j</include>
+        <include>bridj-0.6.2:bridj</include>
+      </includes>
+    </dependencySet>
+  </dependencySets>
+  <fileSets>
+    <fileSet>
+      <directory>target/classes</directory>
+      <outputDirectory></outputDirectory>
+    </fileSet>
+  </fileSets>
+</assembly>
